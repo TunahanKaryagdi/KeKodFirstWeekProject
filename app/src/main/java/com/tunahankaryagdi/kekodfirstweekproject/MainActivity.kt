@@ -9,6 +9,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.tunahankaryagdi.kekodfirstweekproject.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -30,50 +32,14 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        setUiListeners()
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        binding.bottomNavigationView.setupWithNavController(navController)
+
     }
 
-
-    private fun setUiListeners() {
-
-        with(binding) {
-            swtEgo.setOnCheckedChangeListener { a, isChecked ->
-                if (isChecked) {
-                    swtHappiness.isEnabled = false
-                    swtOptimism.isEnabled = false
-                    swtKindness.isEnabled = false
-                    swtGiving.isEnabled = false
-                    swtRespect.isEnabled = false
-                } else {
-                    swtHappiness.isEnabled = true
-                    swtOptimism.isEnabled = true
-                    swtKindness.isEnabled = true
-                    swtGiving.isEnabled = true
-                    swtRespect.isEnabled = true
-                    bottomNavigationView.visibility = View.VISIBLE
-                    addToBottomBar(MenuItem.HOME,a)
-                }
-            }
-            swtHappiness.setOnCheckedChangeListener { a, isChecked ->
-                if (isChecked) addToBottomBar(MenuItem.HAPPINESS,a)
-            }
-            swtOptimism.setOnCheckedChangeListener { a, isChecked ->
-                if (isChecked) addToBottomBar(MenuItem.OPTIMISM,a)
-            }
-            swtKindness.setOnCheckedChangeListener { a, isChecked ->
-                if (isChecked) addToBottomBar(MenuItem.KINDESS,a)
-            }
-            swtGiving.setOnCheckedChangeListener { a, isChecked ->
-                if (isChecked) addToBottomBar(MenuItem.GIVING,a)
-            }
-            swtRespect.setOnCheckedChangeListener { a, isChecked ->
-                if (isChecked) addToBottomBar(MenuItem.RESPECT,a)
-            }
-        }
-    }
-
-
-    private fun addToBottomBar(menuItem: MenuItem,button: CompoundButton) {
+    fun addToBottomBar(menuItem: MenuItem,button: CompoundButton) {
 
         val isAdded = addedItems.contains(menuItem)
 
@@ -83,22 +49,35 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-
         if (!isAdded){
             binding.bottomNavigationView.menu.add(
                 Menu.NONE,
                 menuItem.id,
                 Menu.NONE,
                 getString(menuItem.titleResId)
-            )
-                .setIcon(menuItem.iconResId)
+            ).setIcon(menuItem.iconResId)
 
             addedItems.add(menuItem)
         }
-
-
-
     }
 
+    fun removeFromBottomBar(menuItem: MenuItem, button: CompoundButton) {
+        val isAdded = addedItems.contains(menuItem)
+
+        if (isAdded) {
+            binding.bottomNavigationView.menu.removeItem(menuItem.id)
+            addedItems.remove(menuItem)
+            button.isChecked = false
+        }
+    }
+
+    fun removeAllFromBottomBar(){
+        binding.bottomNavigationView.menu.clear()
+        addedItems.clear()
+    }
+
+    fun setBottomBarVisibility(isVisible: Boolean){
+        binding.bottomNavigationView.visibility = if (isVisible) View.VISIBLE else View.INVISIBLE
+    }
 
 }
