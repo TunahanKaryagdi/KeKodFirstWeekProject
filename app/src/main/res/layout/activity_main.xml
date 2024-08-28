@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    android:padding="16dp"
+    tools:context=".MainActivity"
+    tools:ignore="UseSwitchCompatOrMaterialXml"
+    android:layout_gravity="center">
+
+    <!-- 1st Item -->
+    <LinearLayout
+        android:id="@+id/item1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/item2"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        android:layout_marginTop="250dp">
+
+        <Switch
+            android:id="@+id/swtHappiness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvHappiness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/happiness"/>
+    </LinearLayout>
+
+    <!-- 2nd Item -->
+    <LinearLayout
+        android:id="@+id/item2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@id/item1"
+        app:layout_constraintStart_toEndOf="@id/item1"
+        app:layout_constraintEnd_toStartOf="@+id/item3">
+
+        <Switch
+            android:id="@+id/swtOptimism"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvOptimism"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/optimism"/>
+    </LinearLayout>
+
+    <!-- 3rd Item -->
+    <LinearLayout
+        android:id="@+id/item3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@id/item1"
+        app:layout_constraintStart_toEndOf="@id/item2"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Switch
+            android:id="@+id/swtKindness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvKindness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/kindness"/>
+    </LinearLayout>
+
+    <!-- 4th Item -->
+    <LinearLayout
+        android:id="@+id/item4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/item1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/item5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        android:layout_marginTop="50dp">
+
+        <Switch
+            android:id="@+id/swtGiving"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvGiving"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/giving"/>
+    </LinearLayout>
+
+    <!-- 5th Item -->
+    <LinearLayout
+        android:id="@+id/item5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@id/item4"
+        app:layout_constraintStart_toEndOf="@id/item4"
+        app:layout_constraintEnd_toStartOf="@+id/item6">
+
+        <Switch
+            android:id="@+id/swtRespect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvRespect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/respect"/>
+    </LinearLayout>
+
+    <!-- 6th Item -->
+    <LinearLayout
+        android:id="@+id/item6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@id/item4"
+        app:layout_constraintStart_toEndOf="@id/item5"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Switch
+            android:id="@+id/swtEgo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvEgo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ego"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

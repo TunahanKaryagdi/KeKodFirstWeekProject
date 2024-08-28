@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">KeKodFirstWeekProject</string>
+    <string name="happiness">Happiness</string>
+    <string name="optimism">Optimism</string>
+    <string name="kindness">Kindness</string>
+    <string name="giving">Giving</string>
+    <string name="ego">Ego</string>
+    <string name="respect">Respect</string>
+</resources>
