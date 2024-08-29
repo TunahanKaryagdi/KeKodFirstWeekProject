@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         val isAdded = addedItems.contains(menuItem)
 
         if (addedItems.size >= 5){
-            Toast.makeText(this,"Cannot",Toast.LENGTH_LONG).show()
+            Toast.makeText(this,getString(R.string.cannot),Toast.LENGTH_LONG).show()
             button.isChecked = false
             return
         }

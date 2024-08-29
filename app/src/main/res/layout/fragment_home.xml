@@ -26,7 +26,9 @@
             android:id="@+id/swtHappiness"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:enabled="false"/>
+            android:enabled="false"
+            android:thumbTint="@drawable/switch_thumb_color"
+            android:trackTint="@drawable/switch_thumb_color"/>
 
         <TextView
             android:id="@+id/tvHappiness"
@@ -50,7 +52,9 @@
             android:id="@+id/swtOptimism"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:enabled="false"/>
+            android:enabled="false"
+            android:thumbTint="@drawable/switch_thumb_color"
+            android:trackTint="@drawable/switch_thumb_color"/>
 
         <TextView
             android:id="@+id/tvOptimism"
@@ -74,7 +78,9 @@
             android:id="@+id/swtKindness"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:enabled="false"/>
+            android:enabled="false"
+            android:thumbTint="@drawable/switch_thumb_color"
+            android:trackTint="@drawable/switch_thumb_color"/>
 
         <TextView
             android:id="@+id/tvKindness"
@@ -100,7 +106,9 @@
             android:id="@+id/swtGiving"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:enabled="false"/>
+            android:enabled="false"
+            android:thumbTint="@drawable/switch_thumb_color"
+            android:trackTint="@drawable/switch_thumb_color"/>
 
         <TextView
             android:id="@+id/tvGiving"
@@ -124,7 +132,9 @@
             android:id="@+id/swtRespect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:enabled="false"/>
+            android:enabled="false"
+            android:thumbTint="@drawable/switch_thumb_color"
+            android:trackTint="@drawable/switch_thumb_color"/>
 
         <TextView
             android:id="@+id/tvRespect"
@@ -148,7 +158,9 @@
             android:id="@+id/swtEgo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true" />
+            android:checked="true"
+            android:thumbTint="@drawable/switch_thumb_color"
+            android:trackTint="@drawable/switch_thumb_color"/>
 
         <TextView
             android:id="@+id/tvEgo"

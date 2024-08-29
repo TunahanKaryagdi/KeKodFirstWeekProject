@@ -7,6 +7,11 @@
     <string name="ego">Ego</string>
     <string name="respect">Respect</string>
     <string name="home">Home</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="respect_text">Respect is the recognition of the inherent value and dignity of each individual.</string>
+    <string name="optimism_text">Optimism is the belief that good things will happen and that challenges will be overcome.</string>
+    <string name="kindness_text">Kindness is the quality of being friendly, generous, and considerate.</string>
+    <string name="happiness_text">Happiness is a state of mind that comes from positive emotions and a sense of well-being.</string>
+    <string name="giving_text">Giving is the act of sharing what we have with others, be it time, resources, or love.</string>
+    <string name="cannot">More than 5 cannot be added</string>
 </resources>
