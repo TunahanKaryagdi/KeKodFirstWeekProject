@@ -5,4 +5,14 @@
     <color name="green">#4CAF50</color>
     <color name="red">#F44336</color>
     <color name="gray">#BDBDBD</color>
+    <color name="colorSwitchThumbNormal">#FF5722</color>
+    <color name="colorSwitchThumbChecked">#4CAF50</color>
+    <color name="colorSwitchTrackNormal">#E0E0E0</color>
+    <color name="colorSwitchTrackChecked">#4CAF50</color>
+    <color name="switch_thumb_on">#4CAF50</color>
+    <color name="switch_thumb_off">#F44336</color>
+    <color name="switch_track_on">#B9FBC0</color>
+    <color name="switch_track_off">#F9B0B0</color>
+    <color name="switch_thumb_disabled">#B0BEC5</color>
+    <color name="switch_track_disabled">#E0E0E0</color>
 </resources>

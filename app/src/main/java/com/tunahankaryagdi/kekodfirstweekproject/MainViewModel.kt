@@ -11,46 +11,45 @@ class MainViewModel : ViewModel() {
     val addedItems: LiveData<MutableList<MenuItem>> get() = _addedItems
 
     private val _egoSwitch: MutableLiveData<Boolean> = MutableLiveData(true)
-    val egoSwitch : LiveData<Boolean> get() = _egoSwitch
+    val egoSwitch: LiveData<Boolean> get() = _egoSwitch
 
     private val _happinessSwitch: MutableLiveData<Boolean> = MutableLiveData(false)
-    val happinessSwitch : LiveData<Boolean> get() = _happinessSwitch
+    val happinessSwitch: LiveData<Boolean> get() = _happinessSwitch
 
     private val _optimismSwitch: MutableLiveData<Boolean> = MutableLiveData(false)
-    val optimismSwitch : LiveData<Boolean> get() = _optimismSwitch
+    val optimismSwitch: LiveData<Boolean> get() = _optimismSwitch
 
     private val _kindnessSwitch: MutableLiveData<Boolean> = MutableLiveData(false)
-    val kindnessSwitch : LiveData<Boolean> get() = _kindnessSwitch
+    val kindnessSwitch: LiveData<Boolean> get() = _kindnessSwitch
 
     private val _givingSwitch: MutableLiveData<Boolean> = MutableLiveData(false)
-    val givingSwitch : LiveData<Boolean> get() = _givingSwitch
+    val givingSwitch: LiveData<Boolean> get() = _givingSwitch
 
     private val _respectSwitch: MutableLiveData<Boolean> = MutableLiveData(false)
-    val respectSwitch : LiveData<Boolean> get() = _respectSwitch
+    val respectSwitch: LiveData<Boolean> get() = _respectSwitch
 
 
-
-    fun setEgoSwitch(value: Boolean){
+    fun setEgoSwitch(value: Boolean) {
         _egoSwitch.value = value
     }
 
-    fun setHappinessSwitch(value: Boolean){
+    fun setHappinessSwitch(value: Boolean) {
         _happinessSwitch.value = value
     }
 
-    fun setOptimismSwitch(value: Boolean){
+    fun setOptimismSwitch(value: Boolean) {
         _optimismSwitch.value = value
     }
 
-    fun setKindnessSwitch(value: Boolean){
+    fun setKindnessSwitch(value: Boolean) {
         _kindnessSwitch.value = value
     }
 
-    fun setGivingSwitch(value: Boolean){
+    fun setGivingSwitch(value: Boolean) {
         _givingSwitch.value = value
     }
 
-    fun setRespectSwitch(value: Boolean){
+    fun setRespectSwitch(value: Boolean) {
         _respectSwitch.value = value
     }
 
@@ -68,7 +67,7 @@ class MainViewModel : ViewModel() {
         return _addedItems.value?.contains(menuItem) ?: false
     }
 
-    fun removeItem(item: MenuItem){
+    fun removeItem(item: MenuItem) {
         val currentList = _addedItems.value ?: mutableListOf()
         currentList.remove(item)
         _addedItems.value = currentList

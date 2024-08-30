@@ -1,11 +1,11 @@
-package com.tunahankaryagdi.kekodfirstweekproject
+package com.tunahankaryagdi.kekodfirstweekproject.optimism
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.tunahankaryagdi.kekodfirstweekproject.databinding.FragmentKindnessBinding
+import androidx.fragment.app.Fragment
+import com.tunahankaryagdi.kekodfirstweekproject.R
 import com.tunahankaryagdi.kekodfirstweekproject.databinding.FragmentOptimismBinding
 
 

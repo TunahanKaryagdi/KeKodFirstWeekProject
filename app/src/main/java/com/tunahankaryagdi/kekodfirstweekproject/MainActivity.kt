@@ -3,7 +3,6 @@ package com.tunahankaryagdi.kekodfirstweekproject
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
-import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -88,14 +87,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun removeFromBottomBar(menuItem: MenuItem, button: CompoundButton) {
+    fun removeFromBottomBar(menuItem: MenuItem): Boolean {
         val isAdded = viewModel.isAdded(menuItem)
 
         if (isAdded) {
             binding.bottomNavigationView.menu.removeItem(menuItem.id)
             viewModel.removeItem(menuItem)
-            button.isChecked = false
+            return true
         }
+        return false
     }
 
     fun removeAllFromBottomBar() {

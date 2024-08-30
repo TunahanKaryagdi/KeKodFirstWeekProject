@@ -1,18 +1,15 @@
-package com.tunahankaryagdi.kekodfirstweekproject
+package com.tunahankaryagdi.kekodfirstweekproject.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
-import android.widget.Toast
-import androidx.activity.viewModels
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import com.tunahankaryagdi.kekodfirstweekproject.databinding.FragmentHappinessBinding
+import com.tunahankaryagdi.kekodfirstweekproject.MainActivity
+import com.tunahankaryagdi.kekodfirstweekproject.MainViewModel
+import com.tunahankaryagdi.kekodfirstweekproject.MenuItem
+import com.tunahankaryagdi.kekodfirstweekproject.R
 import com.tunahankaryagdi.kekodfirstweekproject.databinding.FragmentHomeBinding
 
 
@@ -84,8 +81,20 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     }
 
-    private fun removeFromBottomBar(menuItem: MenuItem, button: CompoundButton) {
-        (activity as MainActivity).removeFromBottomBar(menuItem, button)
+    private fun removeFromBottomBar(menuItem: MenuItem) {
+        val isSuccess = (activity as MainActivity).removeFromBottomBar(menuItem)
+        if (!isSuccess) return
+
+        when (menuItem) {
+            MenuItem.HAPPINESS -> viewModel.setHappinessSwitch(false)
+            MenuItem.OPTIMISM -> viewModel.setOptimismSwitch(false)
+            MenuItem.KINDESS -> viewModel.setKindnessSwitch(false)
+            MenuItem.GIVING -> viewModel.setGivingSwitch(false)
+            MenuItem.RESPECT -> viewModel.setRespectSwitch(false)
+            else -> {}
+        }
+
+
     }
 
     private fun removeAllFromBottomBar() {
@@ -121,46 +130,26 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
             }
             happinessSwitch.observe(viewLifecycleOwner) { isChecked ->
-                if (isChecked) {
-                    addToBottomBar(MenuItem.HAPPINESS)
-                } else {
-                    removeFromBottomBar(MenuItem.HAPPINESS, binding.swtHappiness)
-                }
+                if (isChecked) addToBottomBar(MenuItem.HAPPINESS) else removeFromBottomBar(MenuItem.HAPPINESS)
                 binding.swtHappiness.isChecked = isChecked
             }
             optimismSwitch.observe(viewLifecycleOwner) { isChecked ->
-                if (isChecked) {
-                    addToBottomBar(MenuItem.OPTIMISM)
-                } else {
-                    removeFromBottomBar(MenuItem.OPTIMISM, binding.swtOptimism)
-                }
+                if (isChecked) addToBottomBar(MenuItem.OPTIMISM) else removeFromBottomBar(MenuItem.OPTIMISM)
                 binding.swtOptimism.isChecked = isChecked
 
             }
             kindnessSwitch.observe(viewLifecycleOwner) { isChecked ->
-                if (isChecked) {
-                    addToBottomBar(MenuItem.KINDESS)
-                } else {
-                    removeFromBottomBar(MenuItem.KINDESS, binding.swtKindness)
-                }
+                if (isChecked) addToBottomBar(MenuItem.KINDESS) else removeFromBottomBar(MenuItem.KINDESS)
                 binding.swtKindness.isChecked = isChecked
 
             }
             givingSwitch.observe(viewLifecycleOwner) { isChecked ->
-                if (isChecked) {
-                    addToBottomBar(MenuItem.GIVING)
-                } else {
-                    removeFromBottomBar(MenuItem.GIVING, binding.swtGiving)
-                }
+                if (isChecked) addToBottomBar(MenuItem.GIVING) else removeFromBottomBar(MenuItem.GIVING)
                 binding.swtGiving.isChecked = isChecked
 
             }
             respectSwitch.observe(viewLifecycleOwner) { isChecked ->
-                if (isChecked) {
-                    addToBottomBar(MenuItem.RESPECT)
-                } else {
-                    removeFromBottomBar(MenuItem.RESPECT, binding.swtRespect)
-                }
+                if (isChecked) addToBottomBar(MenuItem.RESPECT) else removeFromBottomBar(MenuItem.RESPECT)
                 binding.swtRespect.isChecked = isChecked
 
             }
