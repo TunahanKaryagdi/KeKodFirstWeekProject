@@ -8,6 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.tunahankaryagdi.kekodfirstweekproject.databinding.FragmentHappinessBinding
 import com.tunahankaryagdi.kekodfirstweekproject.databinding.FragmentHomeBinding
 
@@ -15,6 +19,7 @@ import com.tunahankaryagdi.kekodfirstweekproject.databinding.FragmentHomeBinding
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var binding: FragmentHomeBinding
+    private val viewModel: MainViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -29,60 +34,63 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUiListeners()
+        observe()
     }
 
     private fun setUiListeners() {
 
         with(binding) {
-            swtEgo.setOnCheckedChangeListener { a, isChecked ->
-                if (isChecked) {
-                    swtHappiness.isEnabled = false
-                    swtOptimism.isEnabled = false
-                    swtKindness.isEnabled = false
-                    swtGiving.isEnabled = false
-                    swtRespect.isEnabled = false
-                    setVisibility(false)
-                    removeAllFromBottomBar()
-
-                } else {
-                    swtHappiness.isEnabled = true
-                    swtOptimism.isEnabled = true
-                    swtKindness.isEnabled = true
-                    swtGiving.isEnabled = true
-                    swtRespect.isEnabled = true
-                    setVisibility(true)
-                    addToBottomBar(MenuItem.HOME,a)
-                }
+            swtEgo.setOnCheckedChangeListener { _, isChecked -> viewModel.setEgoSwitch(isChecked) }
+            swtHappiness.setOnCheckedChangeListener { _, isChecked ->
+                viewModel.setHappinessSwitch(
+                    isChecked
+                )
             }
-            swtHappiness.setOnCheckedChangeListener { a, isChecked ->
-                if (isChecked) addToBottomBar(MenuItem.HAPPINESS,a) else removeFromBottomBar(MenuItem.HAPPINESS,a)
+            swtOptimism.setOnCheckedChangeListener { _, isChecked ->
+                viewModel.setOptimismSwitch(
+                    isChecked
+                )
             }
-            swtOptimism.setOnCheckedChangeListener { a, isChecked ->
-                if (isChecked) addToBottomBar(MenuItem.OPTIMISM,a) else removeFromBottomBar(MenuItem.OPTIMISM,a)
+            swtKindness.setOnCheckedChangeListener { _, isChecked ->
+                viewModel.setKindnessSwitch(
+                    isChecked
+                )
             }
-            swtKindness.setOnCheckedChangeListener { a, isChecked ->
-                if (isChecked) addToBottomBar(MenuItem.KINDESS,a) else removeFromBottomBar(MenuItem.KINDESS,a)
+            swtGiving.setOnCheckedChangeListener { _, isChecked ->
+                viewModel.setGivingSwitch(
+                    isChecked
+                )
             }
-            swtGiving.setOnCheckedChangeListener { a, isChecked ->
-                if (isChecked) addToBottomBar(MenuItem.GIVING,a) else removeFromBottomBar(MenuItem.GIVING,a)
-            }
-            swtRespect.setOnCheckedChangeListener { a, isChecked ->
-                if (isChecked) addToBottomBar(MenuItem.RESPECT,a) else removeFromBottomBar(MenuItem.RESPECT,a)
+            swtRespect.setOnCheckedChangeListener { _, isChecked ->
+                viewModel.setRespectSwitch(
+                    isChecked
+                )
             }
         }
     }
 
-    private fun addToBottomBar(menuItem: MenuItem,button: CompoundButton) {
-        (activity as MainActivity).addToBottomBar(menuItem,button)
+    private fun addToBottomBar(menuItem: MenuItem) {
+        val isSuccess = (activity as MainActivity).addToBottomBar(menuItem)
+        if (isSuccess) return
+
+        when (menuItem) {
+            MenuItem.HAPPINESS -> viewModel.setHappinessSwitch(false)
+            MenuItem.OPTIMISM -> viewModel.setOptimismSwitch(false)
+            MenuItem.KINDESS -> viewModel.setKindnessSwitch(false)
+            MenuItem.GIVING -> viewModel.setGivingSwitch(false)
+            MenuItem.RESPECT -> viewModel.setRespectSwitch(false)
+            else -> {}
+        }
+
     }
 
-    private fun removeFromBottomBar(menuItem: MenuItem, button: CompoundButton){
-        (activity as MainActivity).removeFromBottomBar(menuItem,button)
+    private fun removeFromBottomBar(menuItem: MenuItem, button: CompoundButton) {
+        (activity as MainActivity).removeFromBottomBar(menuItem, button)
     }
 
-    private fun removeAllFromBottomBar(){
+    private fun removeAllFromBottomBar() {
         (activity as MainActivity).removeAllFromBottomBar()
-        with(binding){
+        with(binding) {
             swtHappiness.isChecked = false
             swtOptimism.isChecked = false
             swtKindness.isChecked = false
@@ -91,7 +99,81 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    private fun setVisibility(isVisible: Boolean){
+    private fun setVisibility(isVisible: Boolean) {
         (activity as MainActivity).setBottomBarVisibility(isVisible)
+    }
+
+    private fun observe() {
+
+        with(viewModel) {
+            egoSwitch.observe(viewLifecycleOwner) { isChecked ->
+                with(binding) {
+                    if (isChecked) {
+                        setSwitchesEnabled(false)
+                        removeAllFromBottomBar()
+                        setVisibility(false)
+                    } else {
+                        setSwitchesEnabled(true)
+                        setVisibility(true)
+                        addToBottomBar(MenuItem.HOME)
+                    }
+                    swtEgo.isChecked = isChecked
+                }
+            }
+            happinessSwitch.observe(viewLifecycleOwner) { isChecked ->
+                if (isChecked) {
+                    addToBottomBar(MenuItem.HAPPINESS)
+                } else {
+                    removeFromBottomBar(MenuItem.HAPPINESS, binding.swtHappiness)
+                }
+                binding.swtHappiness.isChecked = isChecked
+            }
+            optimismSwitch.observe(viewLifecycleOwner) { isChecked ->
+                if (isChecked) {
+                    addToBottomBar(MenuItem.OPTIMISM)
+                } else {
+                    removeFromBottomBar(MenuItem.OPTIMISM, binding.swtOptimism)
+                }
+                binding.swtOptimism.isChecked = isChecked
+
+            }
+            kindnessSwitch.observe(viewLifecycleOwner) { isChecked ->
+                if (isChecked) {
+                    addToBottomBar(MenuItem.KINDESS)
+                } else {
+                    removeFromBottomBar(MenuItem.KINDESS, binding.swtKindness)
+                }
+                binding.swtKindness.isChecked = isChecked
+
+            }
+            givingSwitch.observe(viewLifecycleOwner) { isChecked ->
+                if (isChecked) {
+                    addToBottomBar(MenuItem.GIVING)
+                } else {
+                    removeFromBottomBar(MenuItem.GIVING, binding.swtGiving)
+                }
+                binding.swtGiving.isChecked = isChecked
+
+            }
+            respectSwitch.observe(viewLifecycleOwner) { isChecked ->
+                if (isChecked) {
+                    addToBottomBar(MenuItem.RESPECT)
+                } else {
+                    removeFromBottomBar(MenuItem.RESPECT, binding.swtRespect)
+                }
+                binding.swtRespect.isChecked = isChecked
+
+            }
+        }
+    }
+
+    private fun setSwitchesEnabled(value: Boolean) {
+        with(binding) {
+            swtHappiness.isEnabled = value
+            swtOptimism.isEnabled = value
+            swtKindness.isEnabled = value
+            swtGiving.isEnabled = value
+            swtRespect.isEnabled = value
+        }
     }
 }
